@@ -2,6 +2,10 @@
 
 This repository contains scripts used to generate a finite element model of a rat head aligned to the Blue Brain Project Somatosensory cortex model.
 
+## Dependencies
+
+This pieline depends on ANTs Version: 2.3.4.dev206-g2251c and on fsl version xxx
+
 ## Workflow
 
 1. The mapping from SIGMA atlas labels to Waxholm atlas labels is created semi-automatically with matchRegions.py. This function loads the lists of tissues for the Waxholm atlas (data/whs_sd_tissuelist.txt) and for the SIGMA atlas (../data/SIGMA_Anatomical_Brain_Atlas_Labels.txt) and creates a mapping between them using fuzzy string matching.
