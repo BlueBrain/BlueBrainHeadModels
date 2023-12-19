@@ -17,22 +17,35 @@
 #ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=6880
 export ANTSPATH=~/bin/
 export PATH=${ANTSPATH}:$PATH
-export fix_label='../data/WHS_atlas_prealigned_pad.nii.gz'
-export moving_nii='../data/SIGMA_Anatomical_Brain_Atlas.nii'
-export final_ref='../intermediateFiles/whs2osparc_bsyn_msb3_whs_atlas_aligned_osparcratwears.nii.gz'
+
+export fix_label='../data/WHS_atlas_prealigned_pad.nii.gz' # Waxholm atlas, with padding
+
+export moving_nii='../data/SIGMA_Anatomical_Brain_Atlas.nii' # SIGMA atlas
+
+export sigma_to_wax='../intermediateFiles/sigmaToWax.nii.gz' #SIGMA atlas aligned to Waxholm atlas
+
+export final_ref='../data/whs2osparc_bsyn_msb3_whs_atlas_aligned_osparcratwears.nii.gz' # Waxholm atlas aligned to oSPARC rat
+
+export final_transform='../data/whs2osparc_bsyn_msb3_Composite.h5' # Transform aligning waxholm atlas to oSPARC rat
+
+export sigma_to_osparc='../intermediateData/sigLabelsAlignedToOsparc.nii.gz'
 
 python transforms.py
+
+## First step aligns sigma atlas to waxholm atlas
 
 antsApplyTransforms --dimensionality 3 \
                     --input ${moving_nii} \
                     --reference-image ${fix_label} \
                     --transform [transform.mat, 0] \
-                    --output outputSigLabels.nii.gz \
+                    --output $sigma_to_wax \
                     --interpolation NearestNeighbor
 
+# Second step aligns sigma atlas to oSPARC Rat
+
 antsApplyTransforms --dimensionality 3\
-		    --input outputSigLabels.nii.gz\
-		    --transform whs2osparc_bsyn_msb3_Composite.h5\
+		    --input $sigma_to_wax\
+		    --transform $final_transform\
                     --reference-image ${final_ref}\
-		    --output sigLabelsAlignedToOsparc.nii.gz\
+		    --output $sigma_to_osparc\
 		    --interpolation NearestNeighbor 
