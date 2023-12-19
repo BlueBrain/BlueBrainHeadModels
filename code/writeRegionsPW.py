@@ -2,9 +2,9 @@ import ants
 import numpy as np
 import time 
 
-im = ants.image_read('/gpfs/bbp.cscs.ch/project/proj45/scratch/newRegistration/sigLabelsAlignedToOsparc.nii.gz')
+im = ants.image_read('../intermediateFiles/sigLabelsAlignedToOsparc.nii.gz')
 
-newRegions = np.load('/gpfs/bbp.cscs.ch/project/proj45/scratch/newRegistration/matchRegionsPW.npy')
+newRegions = np.load('../intermediateFiles/matchRegions_SigmaToPW.npy')
 
 imvals = im.numpy()
 s = np.shape(imvals)
@@ -24,4 +24,4 @@ for i,val in enumerate(vals):
 newvals = np.reshape(newvals,s)
 fem = im.new_image_like(newvals)
 
-ants.image_write(fem,'/gpfs/bbp.cscs.ch/project/proj45/scratch/newRegistration/paxLabelsAlignedToOsparc.nii.gz')
+ants.image_write(fem,'../intermediateFiles/paxLabelsAlignedToOsparc.nii.gz')
