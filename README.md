@@ -12,7 +12,7 @@ The relabelled SIGMA atlas is masked using maskBrain.py. This script creates a c
 
 The relabelled SIGMA atlas label field is mapped to the Waxholm atlas using mapSigToWax.sh. This script uses FSL FLIRT to align the relabeld SIGMA atlas to the Waxholm atlas (data/WHS_atlas_prealigned.nii.gz). The mask of the SIGMA atlas, calculated in the previous step, is also used as an input to this step.
 
-The script transform.sh is run next. This first calls the script transform.py, which converts the FSL transformation matrix to an ANTs transformation matrix. transform.sh then applies the ANTs transformation to the original SIGMA atlas. This produces an oSPARC rat with the original SIGMA labels.
+The script transform.sh is run next. This first calls the script transform.py, which converts the FSL transformation matrix to an ANTs transformation matrix. transform.sh then applies the ANTs transformation to the original SIGMA atlas. This produces an oSPARC rat with the original SIGMA labels. Note that this step makes use of **data/whs2osparc_bsyn_msb3_Composite.h5**
 
 The mapping from the SIGMA labels to the Paxinos-Watson labels is calculated as in the old pipeline. The output from the previous step is relabelled with the Paxinos-Watson regions using writeRegionsPW.py
 
