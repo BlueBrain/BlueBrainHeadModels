@@ -19,13 +19,13 @@ export ANTSPATH=~/bin/
 export PATH=${ANTSPATH}:$PATH
 export OUTPUT_PREFIX='pax'
 
-export moving_nii='../intermediateData/paxLabelsAlignedToOsparcMasked.nii.gz' 
+export moving_nii='../intermediateData/paxLabelsAlignedToOsparcMasked.nii.gz'  # Osparc rat with paxinos-watson labels, with mask applied
 
 export fix_nii='../data/PW_RBSC_6th_indexed_volume.nii.gz' # Paxinos-watson atlas
 
-export in_mask='../intermediateData/paxLabelsAlignedToOsparcMask.nii.gz'
+export in_mask='../intermediateData/paxLabelsAlignedToOsparcMask.nii.gz'# Mask of osparc rat, from eval.py
 
-export ref_mask='../intermediateData/PWMaskMask.nii.gz'
+export ref_mask='../intermediateData/PWMaskMask.nii.gz'# Mask of paxinos-watson atlas, from eval.py
 
 export transform_osparc_to_pw='../intermediateData/pwMatrix.mat' # FSL transformation matrix that aligns osparc rat to paxinos-watson atlas
 
