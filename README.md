@@ -1,13 +1,16 @@
 # align-atlases-to-bbp
 
-This repository contains scripts used to generate a finite element model of a rat head aligned to the Blue Brain Project Somatosensory cortex model. The workflow is as follows:
+This repository contains scripts used to generate a finite element model of a rat head aligned to the Blue Brain Project Somatosensory cortex model.
 
-The mapping from SIGMA atlas labels to Waxholm atlas labels is created semi-automatically with matchRegions.py. 
-The relabelled SIGMA atlas is written using writeRegions.py
+## Workflow
 
-The relabelled SIGMA atlas is masked using maskBrain.py
+The mapping from SIGMA atlas labels to Waxholm atlas labels is created semi-automatically with matchRegions.py. This function loads the lists of tissues for the Waxholm atlas (data/whs_sd_tissuelist.txt) and for the SIGMA atlas (../data/SIGMA_Anatomical_Brain_Atlas_Labels.txt) and creates a mapping between them using fuzzy string matching.
 
-The relabelled SIGMA atlas label field is mapped to the Waxholm atlas using mapSigToWax.sh. The mask from step 2 is used as an input to this step.
+The relabelled SIGMA atlas is written using writeRegions.py. This script loads the original SIGMA atlas (data/SIGMA_Anatomical_Brain_Atlas.nii) and replaces its labels with the Waxholm labels from the previous step.
+
+The relabelled SIGMA atlas is masked using maskBrain.py. This script creates a copy of the relabelled SIGMA atlas, in which only background and non-background are distinguished.
+
+The relabelled SIGMA atlas label field is mapped to the Waxholm atlas using mapSigToWax.sh. This script uses FSL FLIRT to align the relabeld SIGMA atlas to the Waxholm atlas (data/WHS_atlas_prealigned.nii.gz). The mask of the SIGMA atlas, calculated in the previous step, is also used as an input to this step.
 
 The transformation calculated in step 3 is applied to the original SIGMA atlas using transform.sh, which calls transforms.py. This produces an oSPARC rat with the original SIGMA labels.
 
