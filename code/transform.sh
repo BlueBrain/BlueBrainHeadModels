@@ -18,7 +18,7 @@
 export ANTSPATH=~/bin/
 export PATH=${ANTSPATH}:$PATH
 
-export fix_label='../data/WHS_atlas_prealigned_pad.nii.gz' # Waxholm atlas, with padding
+export fix_label='../data/WHS_atlas_prealigned.nii.gz' # Waxholm atlas
 
 export moving_nii='../data/SIGMA_Anatomical_Brain_Atlas.nii' # SIGMA atlas
 
