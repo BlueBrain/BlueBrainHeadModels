@@ -15,7 +15,7 @@ ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=9000
 export ANTSPATH=~/bin/
 export PATH=${ANTSPATH}:$PATH
 
-export fix_label='../data/PW_RBSC_6th_indexed_volume_pad_full.nii.gz' # Paxinos watson atlas, resized to match cropped osparc rat head. Produced by transformFullMesh.py
+export fix_label='../intermediateData/PW_RBSC_6th_indexed_volume_pad_full.nii.gz' # Paxinos watson atlas, resized to match cropped osparc rat head. Produced by transformFullMesh.py
 
 export moving_nii='../data/20200810_segmentation_cropped.nii.gz' # Cropped osparc rat head
 
