@@ -4,7 +4,7 @@ This repository contains scripts used to generate a finite element model of a ra
 
 ## Dependencies
 
-This pieline depends on ANTs Version: 2.3.4.dev206-g2251c and on fsl version xxx
+This pieline depends on ANTs Version: 2.3.4.dev206-g2251c and on fsl flirt version 6.0
 
 ## Workflow
 
