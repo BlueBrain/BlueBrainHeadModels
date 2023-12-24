@@ -22,10 +22,12 @@ pairs = []
 
 for i, name in enumerate(sigNames):
     
-    match = process.extractOne(name,waxNames,scorer=fuzz.token_sort_ratio)[0]
+    match = process.extractOne(name,waxNames,scorer=fuzz.token_sort_ratio)[0] # Result obtained by fuzzy string matching
     
+    print(name)
+    print(match)
     
-    m = input()
+    m = input('Press ENTER to accept match. Otherwise, enter your own waxholm label for this sigma label') # Waits for user input. If input is '', then accepts automatic result. Otherwise, uses user input as match
     if m != '':
         match = m
 
