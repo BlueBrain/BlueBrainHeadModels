@@ -8,7 +8,7 @@ This pieline depends on ANTs Version: 2.3.4.dev206-g2251c, antsPy version 0.2.6,
 
 ## Workflow
 
-1. The mapping from SIGMA atlas labels to Waxholm atlas labels is created semi-automatically with matchRegions.py. This function loads the lists of tissues for the Waxholm atlas (data/whs_sd_tissuelist.txt) and for the SIGMA atlas (../data/SIGMA_Anatomical_Brain_Atlas_Labels.txt) and creates a mapping between them using fuzzy string matching.
+1. The mapping from SIGMA atlas labels to Waxholm atlas labels is created semi-automatically with matchRegions.py. This function loads the lists of tissues for the Waxholm atlas (data/whs_sd_tissuelist.txt) and for the SIGMA atlas (../data/SIGMA_Anatomical_Brain_Atlas_Labels.txt) and creates a mapping between them using fuzzy string matching. For each pair, the user must either accept the match, by entering the return key, or provide an alternative region name.
 
 2. The relabelled SIGMA atlas is written using writeRegions.py. This script loads the original SIGMA atlas (data/SIGMA_Anatomical_Brain_Atlas.nii) and replaces its labels with the Waxholm labels from the previous step.
 
