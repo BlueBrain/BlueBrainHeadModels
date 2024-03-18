@@ -1,4 +1,5 @@
 #!/bin/bash
+#SBATCH --job-name="EEG"
 #SBATCH --partition=prod
 #SBATCH --nodes=1
 #SBATCH -C cpu
