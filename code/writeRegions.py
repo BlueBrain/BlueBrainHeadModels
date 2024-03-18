@@ -1,6 +1,5 @@
 import ants
 import numpy as np
-import time 
 
 im = ants.image_read('../data/SIGMA_Anatomical_Brain_Atlas.nii') # SIGMA atlas
 

@@ -5,6 +5,7 @@
 #SBATCH -C cpu
 #SBATCH --time=24:00:00 
 #SBATCH --account=proj85
+#SBATCH --mem=0
 
 export moving_nii='../intermediateFiles/sig_with_waxRegions.nii.gz' # Sigma atlas with waxholm labels, produced by writeRegions.py
 export fix_nii='../data/WHS_atlas_prealigned.nii.gz' # Waxholm atlas

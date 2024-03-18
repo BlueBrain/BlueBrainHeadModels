@@ -2,7 +2,7 @@
 #SBATCH --job-name="EEG"
 #SBATCH --partition=prod
 #SBATCH --nodes=16
-#SBATCH -C nvme|cpu
+#SBATCH -C cpu
 ##SBATCH --ntasks-per-node=36
 #SBATCH --time=24:00:00
 ##SBATCH --mail-type=ALL
@@ -15,7 +15,10 @@
 ##SBATCH --qos=bigjob
 
 #ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=6880
-export ANTSPATH=~/bin/
+
+source ../../environments/atlasEnv/bin/activate 
+
+export ANTSPATH=/gpfs/bbp.cscs.ch/project/proj85/bin/
 export PATH=${ANTSPATH}:$PATH
 
 export fix_label='../data/WHS_atlas_prealigned.nii.gz' # Waxholm atlas
@@ -28,7 +31,9 @@ export final_ref='../data/whs2osparc_bsyn_msb3_whs_atlas_aligned_osparcratwears.
 
 export final_transform='../data/whs2osparc_bsyn_msb3_Composite.h5' # Transform aligning waxholm atlas to oSPARC rat
 
-export sigma_to_osparc='../intermediateData/sigLabelsAlignedToOsparc.nii.gz'
+export sigma_to_osparc='../intermediateFiles/sigLabelsAlignedToOsparc.nii.gz'
+
+export antsTransform='../intermediateFiles/transformSigmaToWaxholm_ANTS.mat'
 
 python transforms.py
 
@@ -37,7 +42,7 @@ python transforms.py
 antsApplyTransforms --dimensionality 3 \
                     --input ${moving_nii} \
                     --reference-image ${fix_label} \
-                    --transform [transform.mat, 0] \
+                    --transform [$antsTransform, 0] \
                     --output $sigma_to_wax \
                     --interpolation NearestNeighbor
 
