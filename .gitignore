@@ -3,3 +3,4 @@ intermediateFiles/
 **/*.log
 **/*.out
 **/*.err
+.ipynb_checkpoints/
