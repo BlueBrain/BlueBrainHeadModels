@@ -4,13 +4,17 @@ This repository contains scripts used to generate a finite element model of a ra
 
 ## Dependencies and configuration instructions
 
-This pieline depends on ANTs Version: 2.3.4.dev206-g2251c, and on fsl flirt version 6.0, both of which must be installed by the user. The user must ensure that FSL is available from the command line (e.g., by modifying their ~/.bash_profile file) for this pipeline to work. 
+This pipeline depends on ANTs Version: 2.3.4.dev206-g2251c, and on fsl flirt version 6.0, both of which must be installed by the user. The user must ensure that FSL is available from the command line (e.g., by modifying their ~/.bash_profile file) for this pipeline to work. 
 
 This pipeline also depends on the python packages listed in the requirements.txt file, which can be pip installed. 
 
 You will have to update the paths in the bash scripts to your ANTs installation and to the location of your pip virtual environment. When running python scripts from the terminal, please ensure you have your virtual environment active
 
 This pipeline was run on a CentOS Linux cluster with the slurm job submission system; the bash scripts assume that this is true of your system as well. 
+
+## Input data
+
+This pipeline aligns the NeuroRat model (https://itis.swiss/virtual-population/animal-models/animals/neurorat/) to the Paxinos-Watson atlas. In intermediate steps, it uses the SIGMA atlas (https://www.nitrc.org/projects/sigma_template) and the Waxholm Atlas (https://www.nitrc.org/projects/whs-sd-atlas). 
 
 ## Workflow
 
@@ -20,15 +24,15 @@ This pipeline was run on a CentOS Linux cluster with the slurm job submission sy
 
 3. The relabelled SIGMA atlas is masked using maskBrain.py (run from the terminal). This script creates a copy of the relabelled SIGMA atlas, in which only background and non-background are distinguished.
 
-4. The relabelled SIGMA atlas label field is mapped to the Waxholm atlas using mapSigToWax.sh. This script uses FSL FLIRT to align the relabeld SIGMA atlas to the Waxholm atlas (data/WHS_atlas_prealigned.nii.gz). The mask of the SIGMA atlas, calculated in the previous step, is also used as an input to this step.
+4. The relabelled SIGMA atlas label field is mapped to the Waxholm atlas using mapSigToWax.sh. This script uses FSL FLIRT to align the relabeled SIGMA atlas to the Waxholm atlas (data/WHS_atlas_prealigned.nii.gz). The mask of the SIGMA atlas, calculated in the previous step, is also used as an input to this step.
 
-5. The script transform.sh is run next. This first calls the script transform.py, which converts the FSL transformation matrix to an ANTs transformation matrix. transform.sh then applies the ANTs transformation to the original SIGMA atlas; this produces a Waxholm rat with the original SIGMA labels.  This step then makes use the transform defined in data/whs2osparc_bsyn_msb3_Composite.h5, which aligns the waxholm rat with the oSPARC rat, to align the SIGMA-labeled waxholm rat to the oSPARC rat, thus producing an oSPARC rat with SIGMA labels.
+5. The script transform.sh is run next. This first calls the script transform.py, which converts the FSL transformation matrix to an ANTs transformation matrix. transform.sh then applies the ANTs transformation to the original SIGMA atlas; this produces a Waxholm rat with the original SIGMA labels.  This step then makes use the transform defined in data/whs2osparc_bsyn_msb3_Composite.h5, which aligns the Waxholm rat with the oSPARC rat, to align the SIGMA-labeled Waxholm rat to the oSPARC rat, thus producing an oSPARC rat with SIGMA labels.
 
 6. The mapping from the SIGMA labels to the Paxinos-Watson labels is calculated using the script **matchRegions_SigmaToPW.py** (run from the terminal). This loads the lists of tissues for the Paxinos-Watson atlas (data/PW_RBSC_6th_cortex.txt for the cortex and data/PW_RBSC_6th_lut.txt for the whole brain) and creates a mapping between them and the list of tissues in the SIGMA atlas using fuzzy string matching.
 
 7. The oSPARC rat with SIGMA labels is then relabelled with the Paxinos-Watson regions using writeRegionsPW.py (run from the terminal)
 
-8. Next, the script eval.py is run from the terminal. This script creates a mask of the osparc rat, and of the paxinos-watson atlas.
+8. Next, the script eval.py is run from the terminal. This script creates a mask of the oSparc rat, and of the paxinos-watson atlas.
 
 9. The masked image created in step 8 is aligned to the PW atlas using registerPaxLabelsToFem.sh This script loads the Paxinos Watson atlas (data/PW_RBSC_6th_indexed_volume.nii.gz), the oSparc rat with paxinos-watson labels, and the masks for each of these two atlases, and uses FSL FLIRT to align the oSparc rat to the PW atlas.
 
