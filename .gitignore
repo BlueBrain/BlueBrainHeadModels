@@ -4,3 +4,4 @@ intermediateFiles/
 **/*.out
 **/*.err
 .ipynb_checkpoints/
+license_notes.txt
