@@ -4,7 +4,7 @@ import scipy.io as sio
 
 matrix = np.loadtxt('../intermediateFiles/pwMatrix.mat')#FSL Transformation matrix aligning osparc to paxinos-watson atlas, produced by registerPaxLabelsToFem.sh
 
-newMat = np.matmul(np.array([[.92,0,0,0],[0,.92,0,0],[0,0,.92,0],[0,0,0,1]]),matrix) # Adds scaling factor of 0.92 to account for age of BBP rat compared to PW rat
+newMat = np.matmul(np.array([[.96837,0,0,0],[0,.96837,0,0],[0,0,.96837,0],[0,0,0,1]]),matrix) # Adds scaling factor of 0.92 to account for age of BBP rat compared to PW rat
 
 ref = ants.image_read('../data/PW_RBSC_6th_indexed_volume.nii.gz') # Paxinos-watson atlas
 
