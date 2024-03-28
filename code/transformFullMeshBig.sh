@@ -11,9 +11,9 @@
 
 
 ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=9000
-source path_to_pip_env # Needs to be set by the user
+source ../../environments/atlasEnv/bin/activate  # Needs to be set by the user
 
-export ANTSPATH='path_to_ants_installation' # Needs to be set by the user
+export ANTSPATH='/gpfs/bbp.cscs.ch/project/proj85/bin/' # Needs to be set by the user
 
 export PATH=${ANTSPATH}:$PATH
 
