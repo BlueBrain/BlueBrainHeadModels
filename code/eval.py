@@ -26,7 +26,7 @@ newvalscopy = im.numpy()
 newvalscopy[np.where(np.isin(newvalscopy,sscx))]=1 # Sets  Sscx to 1
 newvalscopy[np.where(newvalscopy!=1)]=0.5
 
-newvalscopy[np.where(newvals=1)]=0 # Sets background to 0
+newvalscopy[np.where(newvals==0)]=0 # Sets background to 0
 
 
 sscxmask = im.new_image_like(newvalscopy)
@@ -52,7 +52,7 @@ binarymask = im.new_image_like(newvalscopy)
 newvals[np.where(newvals==1)]=0
 newvals[np.where(np.isin(newvals,sscx))]=1 # Sets sscx to 1
 newvals[np.where(newvals!=1)]=0.5
-newvals[np.where(newvalscopy!=1)]-0
+newvals[np.where(newvalscopy!=1)]=0
 
 newimage = im.new_image_like(newvals)
 
