@@ -23,8 +23,8 @@ paxlabels = ants.crop_image(paxlabels,label_image=binarymask)
 sscx = np.array([721,722,723,724,725,726,727,728,730,731])
 
 newvalscopy = im.numpy()
-newvalscopy[np.where(np.isin(newvalscopy,sscx))]=1 # Sets  Sscx to 1
-newvalscopy[np.where(newvalscopy!=1)]=0.5
+newvalscopy[np.where(~np.isin(newvalscopy,sscx))]=10
+newvalscopy[np.where(np.isin(newvalscopy,sscx))]=11 # Sets  Sscx to 1
 
 newvalscopy[np.where(newvals==0)]=0 # Sets background to 0
 
@@ -38,21 +38,18 @@ ants.image_write(newerimage,'../intermediateFiles/paxLabelsAlignedToOsparcMask.n
 
 im = ants.image_read('../data/PW_RBSC_6th_indexed_volume.nii.gz') #Paxinos-watson atlas
 
-#vals = np.unique(im.numpy()) # List of values in paxinos-watson atlas
 
 newvals = im.numpy()
 
-#newvals[np.where(newvals!=0)]=.5 # Sets non-background values to .5
 
 newvalscopy = im.numpy()
 
 newvalscopy[np.where(newvalscopy!=0)]=1 
 binarymask = im.new_image_like(newvalscopy)
 
-newvals[np.where(newvals==1)]=0
-newvals[np.where(np.isin(newvals,sscx))]=1 # Sets sscx to 1
-newvals[np.where(newvals!=1)]=0.5
-newvals[np.where(newvalscopy!=1)]=0
+newvals[np.where(~np.isin(newvals,sscx))]=10
+newvals[np.where(np.isin(newvals,sscx))]=11 # Sets sscx to 1
+newvals[np.where(newvalscopy==0)]=0
 
 newimage = im.new_image_like(newvals)
 

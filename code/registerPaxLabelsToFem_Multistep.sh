@@ -30,6 +30,8 @@ export unused_output_image='../intermediateFiles/pwOutput.nii.gz'
 
 python eval.py
 
+echo "Done with eval"
+
 flirt -paddingsize 400 -refweight $ref_mask_binary -inweight $in_mask_binary -searchcost labeldiff -interp nearestneighbour -datatype int -cost labeldiff -omat $transform_osparc_to_pw -searchrx -180 180 -searchry -180 180 -searchrz -180 180 -v -in $moving_nii -ref $fix_nii -out $unused_output_image
 
 flirt -paddingsize 400 -init $transform_osparc_to_pw -refweight $ref_mask -inweight $in_mask -searchcost labeldiff -interp nearestneighbour -datatype int -cost labeldiff -omat $transform_osparc_to_pw_final -searchrx -180 180 -searchry -180 180 -searchrz -180 180 -v -in $moving_nii -ref $fix_nii -out $unused_output_image
