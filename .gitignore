@@ -3,5 +3,6 @@ intermediateFiles/
 **/*.log
 **/*.out
 **/*.err
+**/*.swp
 .ipynb_checkpoints/
 license_notes.txt
