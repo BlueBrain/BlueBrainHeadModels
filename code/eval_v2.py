@@ -1,6 +1,8 @@
 import ants
 import numpy as np
+import sys
 
+baseline = int(sys.argv[1])
 
 #im = ants.image_read('../intermediateFiles/paxLabelsAlignedToOsparc.nii.gz') # OSPARC atlas with paxinos-watson labels, created by writeRegionsPW.py
 
@@ -47,13 +49,13 @@ newvalscopy = im.numpy()
 newvalscopy[np.where(newvalscopy!=0)]=1 
 binarymask = im.new_image_like(newvalscopy)
 
-newvals[np.where(~np.isin(newvals,sscx))]=6
+newvals[np.where(~np.isin(newvals,sscx))]=baseline
 newvals[np.where(np.isin(newvals,sscx))]=11 # Sets sscx to 1
-newvals[0:int(newvals.shape[0]/2),:,:]=6 # Sets sscx to 1
+newvals[0:int(newvals.shape[0]/2),:,:]=baseline # Sets sscx to 1
 newvals[np.where(newvalscopy==0)]=0
 
 newimage = im.new_image_like(newvals)
 
-ants.image_write(newimage,'../intermediateFiles/PWMaskMask_v2.nii.gz') # Mask of paxinos-watson atlas
+ants.image_write(newimage,'../intermediateFiles/PWMaskMask_v'+str(baseline)+'.nii.gz') # Mask of paxinos-watson atlas
 #ants.image_write(binarymask,'../intermediateFiles/PWMaskBinary.nii.gz') # Mask of paxinos-watson atlas
 

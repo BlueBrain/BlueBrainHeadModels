@@ -8,7 +8,7 @@
 #SBATCH --no-requeue
 #SBATCH --exclusive
 #SBATCH --mem=0
-
+#SBATCH --array=0-10
 
 ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=9000
 source ../../environments/atlasEnv/bin/activate  # Needs to be set by the user
@@ -23,12 +23,14 @@ export moving_nii='../data/Crop-20210802.nii.gz'  # Cropped osparc rat head
 
 export final_ref='../data/whs2osparc_bsyn_msb3_whs_atlas_aligned_osparcratwears.nii.gz' 
 
-export transform='../intermediateFiles/transformFullMesh_v2.mat' # ANTs transformation matrix to align osparc to paxinos-watson atlas. Produced by transformFullMesh.py
+export transform='../intermediateFiles/transformFullMesh_v'$SLURM_ARRAY_TASK_ID'.mat' # ANTs transformation matrix to align osparc to paxinos-watson atlas. Produced by transformFullMesh.py
 
-export output='alignedModel_v2.nii.gz'
+export output='alignedModel_v'$SLURM_ARRAY_TASK_ID'.nii.gz'
  
 
-python transformFullMeshBig_v2.py
+python transformFullMeshBig_v2.py $SLURM_ARRAY_TASK_ID
+
+wait
 
 antsApplyTransforms --dimensionality 3 \
                     --input ${moving_nii} \

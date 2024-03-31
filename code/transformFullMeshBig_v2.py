@@ -1,8 +1,11 @@
 import ants
 import numpy as np
 import scipy.io as sio
+import sys 
 
-matrix = np.loadtxt('../intermediateFiles/pwMatrix_final_v2.mat')#FSL Transformation matrix aligning osparc to paxinos-watson atlas, produced by registerPaxLabelsToFem.sh
+baseline = sys.argv[1]
+
+matrix = np.loadtxt('../intermediateFiles/pwMatrix_final_v'+baseline+'.mat')#FSL Transformation matrix aligning osparc to paxinos-watson atlas, produced by registerPaxLabelsToFem.sh
 
 newMat = np.matmul(np.array([[.96837,0,0,0],[0,.96837,0,0],[0,0,.96837,0],[0,0,0,1]]),matrix) # Adds scaling factor of 0.92 to account for age of BBP rat compared to PW rat
 
@@ -19,4 +22,4 @@ newref = ants.pad_image(ref,pad_width=s) # Adds padding to paxinos-watson atlas
 ants.image_write(newref,'../intermediateFiles/PW_RBSC_6th_indexed_volume_pad_full.nii.gz')
 
 t = ants.fsl2antstransform(newMat,newref,mov)
-ants.write_transform(t,'../intermediateFiles/transformFullMesh_v2.mat') #ANTs Transformation matrix aligning osparc to paxinos-watson atlas
+ants.write_transform(t,'../intermediateFiles/transformFullMesh_v'+baseline+'.mat') #ANTs Transformation matrix aligning osparc to paxinos-watson atlas
