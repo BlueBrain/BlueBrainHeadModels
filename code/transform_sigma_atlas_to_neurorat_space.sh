@@ -21,9 +21,9 @@ export moving_nii='../data/SIGMA_Anatomical_Brain_Atlas.nii' # SIGMA atlas
 
 export sigma_to_wax='../intermediateFiles/sigmaToWax.nii.gz' #SIGMA atlas aligned to Waxholm atlas
 
-export final_ref='../data/whs2osparc_bsyn_msb3_whs_atlas_aligned_osparcratwears.nii.gz' # Waxholm atlas aligned to oSPARC rat
+export final_ref='../data/waxholm_aligned_to_neurorat.nii.gz' # Waxholm atlas aligned to oSPARC rat
 
-export final_transform='../data/whs2osparc_bsyn_msb3_Composite.h5' # Transform aligning waxholm atlas to oSPARC rat
+export final_transform='../data/transform_waxholm_to_neurorat.h5' # Transform aligning waxholm atlas to oSPARC rat
 
 export sigma_to_osparc='../intermediateFiles/sigLabelsAlignedToOsparc.nii.gz'
 

@@ -16,7 +16,7 @@ export PATH=${ANTSPATH}:$PATH
 
 export moving_nii='../intermediateFiles/paxLabelsAlignedToOsparcMasked.nii.gz'  # Osparc rat with paxinos-watson labels, with mask applied
 
-export fix_nii='../data/PW_RBSC_6th_indexed_volume.nii.gz' # Paxinos-watson atlas
+export fix_nii='../data/Paxinos_Watson_Atlas.nii.gz' # Paxinos-watson atlas
 
 export in_mask='../intermediateFiles/paxLabelsAlignedToOsparcMask.nii.gz' # Mask of osparc rat, from eval.py
 

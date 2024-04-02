@@ -1,0 +1,6 @@
+data/Paxinos_Watson_Atlas.nii.gz filter=lfs diff=lfs merge=lfs -text
+data/waxholm_aligned_to_neurorat.nii.gz filter=lfs diff=lfs merge=lfs -text
+data/Waxholm_Atlas.nii.gz filter=lfs diff=lfs merge=lfs -text
+data/Neurorat.nii.gz filter=lfs diff=lfs merge=lfs -text
+data/transform_waxholm_to_neurorat.h5 filter=lfs diff=lfs merge=lfs -text
+data/SIGMA_Anatomical_Brain_Atlas.nii filter=lfs diff=lfs merge=lfs -text

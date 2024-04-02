@@ -19,9 +19,7 @@ export PATH=${ANTSPATH}:$PATH
 
 export fix_label='../intermediateFiles/PW_RBSC_6th_indexed_volume_pad_full.nii.gz' # Paxinos watson atlas, resized to match cropped osparc rat head. Produced by transformFullMeshBig.py
 
-export moving_nii='../data/Crop-20210802.nii.gz'  # Cropped osparc rat head
-
-export final_ref='../data/whs2osparc_bsyn_msb3_whs_atlas_aligned_osparcratwears.nii.gz' 
+export moving_nii='../data/Neurorat.nii.gz'  # Cropped osparc rat head
 
 export transform='../intermediateFiles/transformFullMesh.mat' # ANTs transformation matrix to align osparc to paxinos-watson atlas. Produced by transformFullMesh.py
 

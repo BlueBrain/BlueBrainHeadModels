@@ -7,7 +7,7 @@
 #SBATCH --mem=0
 
 export moving_nii='../intermediateFiles/sig_with_waxRegions.nii.gz' # Sigma atlas with waxholm labels, produced by writeRegions.py
-export fix_nii='../data/WHS_atlas_prealigned.nii.gz' # Waxholm atlas
+export fix_nii='../data/Waxholm_Atlas.nii.gz' # Waxholm atlas
 export moving_mask='../intermediateFiles/mask.nii.gz' # Mask of SIGMA atlas, produced by maskBrain.py
 
 export output_transformation_matrix='../intermediateFiles/matrixSigmaToWaxholm_FSL.mat' # Transformation matrix

@@ -6,11 +6,11 @@ matrix = np.loadtxt('../intermediateFiles/pwMatrix.mat')#FSL Transformation matr
 
 newMat = np.matmul(np.array([[.96837,0,0,0],[0,.96837,0,0],[0,0,.96837,0],[0,0,0,1]]),matrix) # Adds scaling factor of 0.92 to account for age of BBP rat compared to PW rat
 
-ref = ants.image_read('../data/PW_RBSC_6th_indexed_volume.nii.gz') # Paxinos-watson atlas
+ref = ants.image_read('../data/Paxinos_Watson_Atlas.nii.gz') # Paxinos-watson atlas
 
 mov = ants.image_read('../intermediateFiles/paxLabelsAlignedToOsparcMasked.nii.gz')
 
-i = ants.image_read('../data/Crop-20210802.nii.gz') # Cropped head of the osparc rat
+i = ants.image_read('../data/Neurorat.nii.gz') # Cropped head of the osparc rat
 
 size = np.shape(i.numpy())
 s = [(500,500),(1500,500),(500,500)]

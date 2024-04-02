@@ -1,7 +1,7 @@
 from fuzzywuzzy import process,fuzz
 import numpy as np 
 
-waxDat = np.loadtxt('../data/whs_sd_tissuelist.txt',dtype=str) # List of tissues in waxholm atlas
+waxDat = np.loadtxt('../data/Waxholm_Atlas_Labels.txt',dtype=str) # List of tissues in waxholm atlas
 sigDat = np.genfromtxt('../data/SIGMA_Anatomical_Brain_Atlas_Labels.txt', skip_header=14,delimiter='\t',dtype=str) # List of tissues in sigma atlas
 
 sigNums = []

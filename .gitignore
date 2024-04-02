@@ -1,5 +1,5 @@
 intermediateFiles/
-**/*.nii*
+code/*.nii.gz
 **/*.log
 **/*.out
 **/*.err
