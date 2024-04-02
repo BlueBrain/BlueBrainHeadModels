@@ -28,7 +28,7 @@ export transform='../intermediateFiles/transformFullMesh.mat' # ANTs transformat
 export output='alignedModel.nii.gz'
  
 
-python transformFullMeshBig.py
+python convert_to_ants_transform_neurorat_to_paxinos_watson.py
 
 antsApplyTransforms --dimensionality 3 \
                     --input ${moving_nii} \

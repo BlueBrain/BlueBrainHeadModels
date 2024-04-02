@@ -29,7 +29,7 @@ export sigma_to_osparc='../intermediateFiles/sigLabelsAlignedToOsparc.nii.gz'
 
 export antsTransform='../intermediateFiles/transformSigmaToWaxholm_ANTS.mat'
 
-python transforms.py
+python convert_to_ants_transform_sigma_to_waxholm.py
 
 ## First step aligns sigma atlas to waxholm atlas
 
