@@ -16,6 +16,8 @@ This pipeline was run on a CentOS Linux cluster with the slurm job submission sy
 
 This pipeline aligns the NeuroRat model (https://itis.swiss/virtual-population/animal-models/animals/neurorat/) to the Paxinos Watson atlas. In intermediate steps, it uses the SIGMA atlas (https://www.nitrc.org/projects/sigma_template) and the Waxholm Atlas (https://www.nitrc.org/projects/whs-sd-atlas). 
 
+All input data can be downloaded from 10.5281/zenodo.10926947 and should be saved to the *data* folder before beginning the workflow.
+
 ## Workflow
 
 1. A mapping from SIGMA atlas labels to Waxholm atlas labels is created semi-automatically with match_sigma_regions_to_paxinos_watson_atlas.py (run from the terminal). This function loads the lists of tissues for the Waxholm atlas (data/Waxholm_Atlas_Labels.txt) and for the SIGMA atlas (../data/SIGMA_Anatomical_Brain_Atlas_Labels.txt) and creates a mapping between them using fuzzy string matching. For each pair, the user must either accept the match, by entering the return key, or provide an alternative region name.
