@@ -1,4 +1,4 @@
-from fuzzywuzzy import process,fuzz
+from thefuzz import process,fuzz
 import numpy as np 
 
 waxDat = np.loadtxt('../data/Waxholm_Atlas_Labels.txt',dtype=str) # List of tissues in waxholm atlas

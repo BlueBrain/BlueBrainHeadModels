@@ -1,4 +1,4 @@
-from fuzzywuzzy import process,fuzz
+from thefuzz import process,fuzz
 import numpy as np 
 
 paxDat = np.genfromtxt('../data/Paxinos_Watson_Labels_Cortex.txt',delimiter='\t',dtype=str) # List of tissues in paxinos-watson atlas, cortex only
