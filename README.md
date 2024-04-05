@@ -1,4 +1,4 @@
-# align-atlases-to-bbp
+# BlueBrainHeadModels
 
 This repository contains scripts used to generate a finite element model of a rat head aligned to the Blue Brain Project Somatosensory cortex model.
 
