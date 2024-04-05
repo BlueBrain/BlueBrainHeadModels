@@ -1,7 +1,6 @@
 import os, sys
 from collections import namedtuple, Mapping
 
-sys.path.append(r"E:\Develop\Scripts\RegistrationScripts")
 import ants
 
 
@@ -23,22 +22,21 @@ Parameters = namedtuple_with_defaults(
 )
 
 param = Parameters(
-    moving=r"F:\Data\oSPARC\RatVagus\WaxholmAtlas\prealigned\WHS_T2star_prealigned.nii.gz",
-    fixed=r"F:\Data\oSPARC\RatVagus\WaxholmAtlas\oSPARC_space\aic_t1_cropped_350_336_162.nii.gz",
-    working_dir=r"F:\Data\oSPARC\RatVagus\WaxholmAtlas\whs2osparc",
+    moving="../../data/align_waxholm_to_neurorat/WHS_T2star_prealigned.nii.gz",
+    fixed="../../data/align_waxholm_to_neurorat/aic_t1_cropped_350_336_162.nii.gz",
+    working_dir=".",
     gradient_step=0.05,
 )
 
 moving_mask = "NULL"
 moving_mask = (
-    r"F:\Data\oSPARC\RatVagus\WaxholmAtlas\prealigned\WHS_mask3_prealigned.nii.gz"
+    "../../data/align_waxholm_to_neurorat/WHS_mask3_prealigned.nii.gz"
 )
-fixed_mask = r"F:\Data\oSPARC\RatVagus\WaxholmAtlas\oSPARC_space\mask_cortex.nii.gz"
 
 moving_labels = (
-    r"F:\Data\oSPARC\RatVagus\WaxholmAtlas\prealigned\WHS_atlas_prealigned.nii.gz"
+    "../../data/align_waxholm_to_neurorat/WHS_atlas_prealigned.nii.gz"
 )
-fixed_labels = r"F:\Data\oSPARC\RatVagus\WaxholmAtlas\oSPARC_space\aic_labels_cropped_350_336_162.nii.gz"
+fixed_labels = "../../data/align_waxholm_to_neurorat/aic_labels_cropped_350_336_162.nii.gz"
 
 # -------------------------------------------------------------------------------
 working_dir = param.working_dir
@@ -95,7 +93,7 @@ with open(reg.output_prefix + ".log", "w") as logfile:
             # reg.apply_transform(param.moving, param.fixed, False, output=None, logfile=logfile)
 
             ofile = reg.output_prefix + "whs_atlas_aligned_osparcratwears.nii.gz"
-            fixed_labels = r"F:\Data\oSPARC\RatVagus\WaxholmAtlas\whs2osparc\Rat_oSPARC_1-2300_20200810ears_labels.nii.gz"
+            fixed_labels = "../../data/align_waxholm_to_neurorat/Rat_oSPARC_1-2300_20200810ears_labels.nii.gz"
             reg.apply_transform(
                 moving_labels, fixed_labels, True, output=ofile, logfile=logfile
             )
