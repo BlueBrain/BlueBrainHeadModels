@@ -14,7 +14,7 @@ This pipeline was run on a CentOS Linux cluster with the slurm job submission sy
 
 ## Input data
 
-This pipeline aligns the NeuroRat model (https://itis.swiss/virtual-population/animal-models/animals/neurorat/) to the Paxinos Watson atlas. In intermediate steps, it uses the SIGMA atlas (https://www.nitrc.org/projects/sigma_template) and the Waxholm Atlas (https://www.nitrc.org/projects/whs-sd-atlas). 
+This pipeline aligns the  ViZOO NeuroRat (150g) model V4.0 (DOI: 10.13099/VIP91106-04-1, https://itis.swiss/virtual-population/animal-models/animals/neurorat/) to the Paxinos Watson atlas. In intermediate steps, it uses the SIGMA atlas (https://www.nitrc.org/projects/sigma_template) and the Waxholm Atlas (https://www.nitrc.org/projects/whs-sd-atlas). 
 
 All input data can be downloaded from 10.5281/zenodo.10926947 and should be saved to the *data* folder before beginning the workflow.
 
