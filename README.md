@@ -20,7 +20,7 @@ All input data can be downloaded from 10.5281/zenodo.10926947 and should be save
 
 ## Workflow
 
-1. A mapping from SIGMA atlas labels to Waxholm atlas labels is created semi-automatically with match_sigma_regions_to_paxinos_watson_atlas.py (run from the terminal). This function loads the lists of tissues for the Waxholm atlas (data/Waxholm_Atlas_Labels.txt) and for the SIGMA atlas (../data/SIGMA_Anatomical_Brain_Atlas_Labels.txt) and creates a mapping between them using fuzzy string matching. For each pair, the user must either accept the match, by entering the return key, or provide an alternative region name.
+1. A mapping from SIGMA atlas labels to Waxholm atlas labels is created semi-automatically with match_wxaholm_regions_to_sigma_atlas.py (run from the terminal). This function loads the lists of tissues for the Waxholm atlas (data/Waxholm_Atlas_Labels.txt) and for the SIGMA atlas (../data/SIGMA_Anatomical_Brain_Atlas_Labels.txt) and creates a mapping between them using fuzzy string matching. For each pair, the user must either accept the match, by entering the return key, or provide an alternative region name.
 
 2. A relabelled SIGMA atlas is written using write_waxholm_regions_to_sigma_atlas.py (run from the terminal). This script loads the original SIGMA atlas (data/SIGMA_Anatomical_Brain_Atlas.nii) and replaces its labels with the Waxholm labels from the previous step.
 
