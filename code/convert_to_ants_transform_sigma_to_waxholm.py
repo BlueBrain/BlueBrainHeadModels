@@ -2,11 +2,11 @@ import ants
 import numpy as np
 import scipy.io as sio
 
-matrix = np.loadtxt('../intermediateFiles/matrixSigmaToWaxholm_FSL.mat') #FSL Transformation matrix aligning SIGMA to waxholm atlas, produced by mapSigToWax.sh
+matrix = np.loadtxt('../intermediateFiles/matrixSigmaToWaxholm_FSL.mat') #FSL Transformation matrix aligning SIGMA to waxholm atlas, produced by create_transform_sigma_to_waxholm.sh
 
-ref = ants.image_read('../data/WHS_atlas_prealigned.nii.gz') # Waxholm atlas
+ref = ants.image_read('../data/Waxholm_Atlas.nii.gz') # Waxholm atlas
 
-mov = ants.image_read('../intermediateFiles/sig_with_waxRegions.nii.gz') # Sigma atlas with Waxholm regions, produced by writeRegions.py
+mov = ants.image_read('../intermediateFiles/sigma_atlas_with_waxholm_labels.nii.gz') # Sigma atlas with Waxholm labels, produced by write_waxholm_regions_to_sigma_atlas.py
 
 t = ants.fsl2antstransform(matrix,ref,mov)
 

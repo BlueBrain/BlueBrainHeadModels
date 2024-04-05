@@ -3,7 +3,7 @@ import numpy as np
 
 im = ants.image_read('../data/SIGMA_Anatomical_Brain_Atlas.nii') # SIGMA atlas
 
-newRegions = np.load('../intermediateFiles/matchRegions.npy') # List of tissue number correspondences between SIGMA and Waxholm atlas, produced by matchRegions.py
+newRegions = np.load('../intermediateFiles/matchRegions.npy') # List of tissue number correspondences between SIGMA and Waxholm atlas, produced by match_waxholm_regions_to_sigma_atlas.py
 
 imvals = im.numpy() # Atlas to numpy array
 s = np.shape(imvals)
@@ -23,4 +23,4 @@ for i,val in enumerate(vals):
 newvals = np.reshape(newvals,s)
 fem = im.new_image_like(newvals)
 
-ants.image_write(fem,'../intermediateFiles/sig_with_waxRegions.nii.gz') #SIGMA atlas with Waxholm labels
+ants.image_write(fem,'../intermediateFiles/sigma_atlas_with_waxholm_labels.nii.gz') #SIGMA atlas with Waxholm labels

@@ -1,7 +1,7 @@
 from fuzzywuzzy import process,fuzz
 import numpy as np 
 
-paxDat = np.genfromtxt('../data/Paxinos_Watson_Labels_Cortex.txt',delimiter='\t',dtype=str) # List of tissues in paxinos-watson atlas, cortex onlt
+paxDat = np.genfromtxt('../data/Paxinos_Watson_Labels_Cortex.txt',delimiter='\t',dtype=str) # List of tissues in paxinos-watson atlas, cortex only
 sigDat = np.genfromtxt('../data/SIGMA_Anatomical_Brain_Atlas_Labels.txt', skip_header=14,delimiter='\t',dtype=str) # List of tissues in SIGMA atlas
 
 sigNums = []

@@ -17,11 +17,11 @@ export ANTSPATH='path_to_ants_installation' # Needs to be set by the user
 
 export PATH=${ANTSPATH}:$PATH
 
-export fix_label='../intermediateFiles/PW_RBSC_6th_indexed_volume_pad_full.nii.gz' # Paxinos watson atlas, resized to match cropped osparc rat head. Produced by transformFullMeshBig.py
+export fix_label='../intermediateFiles/Paxinos_Watson_Atlas_padded.nii.gz' # Paxinos watson atlas, resized to match cropped osparc rat head. Produced by convert_to_ants_transform_neurorat_to_paxinos_watson.py
 
-export moving_nii='../data/Neurorat.nii.gz'  # Cropped osparc rat head
+export moving_nii='../data/Neurorat.nii.gz'  # Cropped NeuroRat head
 
-export transform='../intermediateFiles/transformFullMesh.mat' # ANTs transformation matrix to align osparc to paxinos-watson atlas. Produced by transformFullMesh.py
+export transform='../intermediateFiles/transformNeuroratToPaxinosWatson_ANTs.mat' # ANTs transformation matrix to align NeuroRat to paxinos-watson atlas. Produced by convert_to_ants_transform_neurorat_to_paxinos_watson.py
 
 export output='alignedModel.nii.gz'
  

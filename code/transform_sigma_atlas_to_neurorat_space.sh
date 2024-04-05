@@ -15,17 +15,17 @@ source path_to_pip_env # Needs to be set by the user
 export ANTSPATH='path_to_ants_installation' # Needs to be set by the user
 export PATH=${ANTSPATH}:$PATH
 
-export fix_label='../data/WHS_atlas_prealigned.nii.gz' # Waxholm atlas
+export fix_label='../data/Waxholm_Atlas.nii.gz' # Waxholm atlas
 
 export moving_nii='../data/SIGMA_Anatomical_Brain_Atlas.nii' # SIGMA atlas
 
-export sigma_to_wax='../intermediateFiles/sigmaToWax.nii.gz' #SIGMA atlas aligned to Waxholm atlas
+export sigma_to_wax='../intermediateFiles/sigma_atlas_transformed_to_waxholm_space.nii.gz' #SIGMA atlas aligned to Waxholm atlas - output of this stage
 
-export final_ref='../data/waxholm_aligned_to_neurorat.nii.gz' # Waxholm atlas aligned to oSPARC rat
+export final_ref='../data/waxholm_aligned_to_neurorat.nii.gz' # Waxholm atlas aligned to NeuroRat
 
-export final_transform='../data/transform_waxholm_to_neurorat.h5' # Transform aligning waxholm atlas to oSPARC rat
+export final_transform='../data/transform_waxholm_to_neurorat.h5' # Transform aligning waxholm atlas to NeuroRat
 
-export sigma_to_osparc='../intermediateFiles/sigLabelsAlignedToOsparc.nii.gz'
+export sigma_to_neurorat='../intermediateFiles/sigma_atlas_transfomed_to_neurorat_space.nii.gz'
 
 export antsTransform='../intermediateFiles/transformSigmaToWaxholm_ANTS.mat'
 
@@ -46,5 +46,5 @@ antsApplyTransforms --dimensionality 3\
 		    --input $sigma_to_wax\
 		    --transform $final_transform\
                     --reference-image ${final_ref}\
-		    --output $sigma_to_osparc\
+		    --output $sigma_to_neurorat\
 		    --interpolation NearestNeighbor 

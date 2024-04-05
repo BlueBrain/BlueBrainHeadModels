@@ -2,7 +2,7 @@ import ants
 import numpy as np
 
 
-im = ants.image_read('../intermediateFiles/paxLabelsAlignedToOsparc.nii.gz') # OSPARC atlas with paxinos-watson labels, created by writeRegionsPW.py
+im = ants.image_read('../intermediateFiles/neurorat_with_paxinos_watson_labels.nii.gz') # NeuroRat atlas with paxinos-watson labels, created by write_paxinos_watson_regions_to_neurorat.py
 
 vals = np.unique(im.numpy()) # List of paxinos-watson labels
 
@@ -20,10 +20,11 @@ newimage = ants.crop_image(newimage,label_image=newerimage)
 
 newerimage = ants.crop_image(newerimage,label_image=newerimage)
 
-ants.image_write(newimage,'../intermediateFiles/paxLabelsAlignedToOsparcMasked.nii.gz') # Osparc rat with paxinos-watson labels, with mask applied
-ants.image_write(newerimage,'../intermediateFiles/paxLabelsAlignedToOsparcMask.nii.gz') # Mask of osparc rat
+ants.image_write(newimage,'../intermediateFiles/neurorat_with_paxinos_watson_labels_masked.nii.gz') # NeuroRat with paxinos-watson labels, with mask applied
 
-im = ants.image_read('../data/PW_RBSC_6th_indexed_volume.nii.gz') #Paxinos-watson atlas
+ants.image_write(newerimage,'../intermediateFiles/neurorat_with_paxinos_watson_labels_mask.nii.gz') # Mask of neurorat
+
+im = ants.image_read('../data/Paxinos_Watson_Atlas.nii.gz') #Paxinos-watson atlas
 
 vals = np.unique(im.numpy()) # List of values in paxinos-watson atlas
 
@@ -33,5 +34,5 @@ newvals[np.where(newvals!=0)]=1 # Sets non-background values to 1
 
 newimage = im.new_image_like(newvals)
 newerimage = ants.crop_image(im,label_image=newimage)
-ants.image_write(newimage,'../intermediateFiles/PWMaskMask.nii.gz') # Mask of paxinos-watson atlas
+ants.image_write(newimage,'../intermediateFiles/Paxinos_Watson_Atlas_Mask.nii.gz') # Mask of paxinos-watson atlas
 

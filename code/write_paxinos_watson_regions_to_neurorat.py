@@ -1,7 +1,7 @@
 import ants
 import numpy as np
 
-im = ants.image_read('../intermediateFiles/sigLabelsAlignedToOsparc.nii.gz') # SIGMA atlas aligned to osparc rat, produced by transform.sh
+im = ants.image_read('../intermediateFiles/sigma_atlas_transfomed_to_neurorat_space.nii.gz') # SIGMA atlas aligned to NeuroRat, produced by transform_sigma_atlas_to_neurorat_space.sh
 
 newRegions = np.load('../intermediateFiles/matchRegions_SigmaToPW.npy') # List of corresponding tissues between sigma and paxinos-watson atlas
 
@@ -23,4 +23,4 @@ for i,val in enumerate(vals):
 newvals = np.reshape(newvals,s)
 fem = im.new_image_like(newvals)
 
-ants.image_write(fem,'../intermediateFiles/paxLabelsAlignedToOsparc.nii.gz') # OSPARC atlas with paxinos-watson labels
+ants.image_write(fem,'../intermediateFiles/neurorat_with_paxinos_watson_labels.nii.gz') # NeuroRat atlas with paxinos-watson labels
