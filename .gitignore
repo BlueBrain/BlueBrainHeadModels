@@ -5,4 +5,5 @@ code/*.nii.gz
 **/*.err
 **/*.swp
 .ipynb_checkpoints/
+data/
 license_notes.txt
