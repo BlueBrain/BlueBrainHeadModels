@@ -4,11 +4,9 @@ if os.sys.platform == "darwin":
     antsExeDir = "/Users/lloyd/Code/builds/ants/bin"
     suffix = ""
 else:
-    antsExeDir = r"F:\Data\Registration\ants\build\bin\Release"
-    antsExeDir = r"F:\pack\ANTs-2.3.1\build\bin\RelWithDebInfo"
-    antsExeDir = r"F:\pack\ANTS-master\build\ANTS-build\Examples\Release"
+    antsExeDir = '/gpfs/bbp.cscs.ch/project/proj85/bin/'
     elastixExeDir = r"F:\Data\Registration\elastix_windows64_v4.8"
-    suffix = ".exe"
+    suffix = ""
 
 antsRegistrationCommand = os.path.join(antsExeDir, "antsRegistration" + suffix)
 antsTransformCommand = os.path.join(antsExeDir, "antsApplyTransforms" + suffix)

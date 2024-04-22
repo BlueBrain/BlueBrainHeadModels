@@ -11,8 +11,6 @@
 
 ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=2560
 
-export ANTSPATH='path_to_ants_installation' # Needs to be set by the user
-export PATH=${ANTSPATH}:$PATH
 
 export moving_nii='../intermediateFiles/neurorat_with_paxinos_watson_labels_masked.nii.gz'  # NeuroRat with paxinos-watson labels, with mask applied. From mask_neurorat_and_paxinos_watson.py
 

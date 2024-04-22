@@ -10,9 +10,9 @@
 #SBATCH --mem=0
 
 
-source path_to_pip_env # Needs to be set by the user
+source ../../environments/atlasEnv/bin/activate # Needs to be set by the user
 
-export ANTSPATH='path_to_ants_installation' # Needs to be set by the user
+export ANTSPATH=/gpfs/bbp.cscs.ch/project/proj85/bin/ # Needs to be set by the user
 export PATH=${ANTSPATH}:$PATH
 
 export fix_label='../data/Waxholm_Atlas.nii.gz' # Waxholm atlas
