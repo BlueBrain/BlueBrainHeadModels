@@ -36,9 +36,9 @@ Download and unzip the folder *align_waxholm_to_neurorat.zip* from the Zenodo re
 
 ### Register Waxholm atlas to NeuroRat space
 
-5. Run the scrpit align_waxholm_to_neurorat/mask.py (from the terminal). This script creates a binary mask for the NeuroRat model label field (data/align_waxholm_to_neurorat/aic_labels_cropped_350_336_162.nii.gz)
+5. Run the scrpit align_waxholm_to_neurorat/mask.py (from the terminal). This script creates a binary mask for the NeuroRat model label field (data/align_waxholm_to_neurorat/NeuroRatLabels.nii.gz)
 
-6. Run the script align_waxholm_to_neurorat/register.sh. This script launches align_waxholm_to_neurorat/register_waxholm2aic.py, which creates a nonlinear alignment between the Waxholm atlas (data/align_waxholm_to_neurorat/WHS_T2star_prealigned.nii.gz) and the NeuroRat atlas (data/align_waxholm_to_neurorat/aic_t1_cropped_350_336_162.nii.gz)
+6. Run the script align_waxholm_to_neurorat/register.sh. This script launches align_waxholm_to_neurorat/register_waxholm2aic.py, which creates a nonlinear alignment between the Waxholm atlas (data/align_waxholm_to_neurorat/Waxholm_Atlas_MRI.nii.gz) and the NeuroRat atlas (data/align_waxholm_to_neurorat/NeuroRat_MRI.nii.gz)
 
 ### Register SIGMA Atlas to NeuroRat space
 
