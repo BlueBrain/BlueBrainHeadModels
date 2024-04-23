@@ -404,10 +404,13 @@ class Registration(object):
         logfile.flush()
 
         prog = subprocess.Popen(
-            args, stdout=logfile, stderr=logfile, cwd=self.working_dir
+            args
         )
         prog.communicate()
-        return True if prog.returncode == 0 else False
+        
+        if prog.returncode != 0:
+            raise Exception()
+        #return True if prog.returncode == 0 else False
 
     def apply_transform(
         self, moving, fixed, is_labelfield=False, output=None, logfile=None
