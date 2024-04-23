@@ -16,34 +16,47 @@ This pipeline was run on a CentOS Linux cluster with the slurm job submission sy
 
 This pipeline aligns the  ViZOO NeuroRat (150g) model V4.0 (DOI: 10.13099/VIP91106-04-1, https://itis.swiss/virtual-population/animal-models/animals/neurorat/) to the Paxinos Watson atlas. In intermediate steps, it uses the SIGMA atlas (https://www.nitrc.org/projects/sigma_template) and the Waxholm Atlas (https://www.nitrc.org/projects/whs-sd-atlas). 
 
-All input data can be downloaded from 10.5281/zenodo.10926947 and should be saved to the *data* folder before beginning the workflow.
+All input data can be downloaded from 10.5281/zenodo.10926947. Except for the zip file described in the next paragraph, all of the files should be saved to the *data* folder before beginning the workflow.
+
+Download and unzip the folder *align_waxholm_to_neurorat.zip* from the Zenodo repository, and copy it to the folder *data/align_waxholm_to_neurorat* in this repo.
 
 ## Workflow
 
-1. A mapping from SIGMA atlas labels to Waxholm atlas labels is created semi-automatically with match_wxaholm_regions_to_sigma_atlas.py (run from the terminal). This function loads the lists of tissues for the Waxholm atlas (data/Waxholm_Atlas_Labels.txt) and for the SIGMA atlas (../data/SIGMA_Anatomical_Brain_Atlas_Labels.txt) and creates a mapping between them using fuzzy string matching. For each pair, the user must either accept the match, by entering the return key, or provide an alternative region name.
+### Relabel SIGMA atlas with regions from Waxholm atlas
+
+1. A mapping from SIGMA atlas labels to Waxholm atlas labels is created semi-automatically with match_waxholm_regions_to_sigma_atlas.py (run from the terminal). This function loads the lists of tissues for the Waxholm atlas (data/Waxholm_Atlas_Labels.txt) and for the SIGMA atlas (../data/SIGMA_Anatomical_Brain_Atlas_Labels.txt) and creates a mapping between them using fuzzy string matching. For each pair, the user must either accept the match, by entering the return key, or provide an alternative region name. The mapping used in the paper is provided in (intermediateFiles/matchRegions.npy)
 
 2. A relabelled SIGMA atlas is written using write_waxholm_regions_to_sigma_atlas.py (run from the terminal). This script loads the original SIGMA atlas (data/SIGMA_Anatomical_Brain_Atlas.nii) and replaces its labels with the Waxholm labels from the previous step.
+
+### Register SIGMA atlas to Waxholm space
 
 3. The relabelled SIGMA atlas is masked using mask_sigma_atlas.py (run from the terminal). This script creates a copy of the relabelled SIGMA atlas, in which only background and non-background are distinguished.
 
 4. The relabelled SIGMA atlas label field is mapped to the Waxholm atlas using create_transform_sigma_to_waxholm.sh. This script uses FSL FLIRT to align the relabeled SIGMA atlas to the Waxholm atlas (data/Waxholm_Atlas.nii.gz). The mask of the SIGMA atlas, calculated in the previous step, is also used as an input to this step.
 
-5. The script transform_sigma_atlas_to_neurorat_space.sh is run next. This first calls the script convert_to_ants_transform_sigma_to_waxholm.py, which converts the FSL transformation matrix from the previous step to an ANTs transformation matrix. transform_sigma_atlas_to_neurorat_space.sh then applies the ANTs transformation to the original SIGMA atlas; this produces a Waxholm rat with the original SIGMA labels. It then aligns the SIGMA-labeled Waxholm rat to the Neurorat using the transform defined in data/transform_waxholm_to_neurorat.h5, which was calculated by aligning the original Waxholm rat with the Neurorat (see the section **Align Waxholm atlas with NeuroRat** below).
+### Register Waxholm atlas to NeuroRat space
 
-6. The mapping from the SIGMA labels to the Paxinos-Watson labels is calculated using the script **match_sigma_regions_to_paxinos_watson_atlas.py** (run from the terminal). This loads the lists of tissues for the Paxinos Watson atlas (data/Paxinos_Watson_Labels_Cortex.txt for the cortex and data/Paxinos_Watson_Labels.txt for the whole brain) and creates a mapping between them and the list of tissues in the SIGMA atlas using fuzzy string matching.
+5. Run the scrpit align_waxholm_to_neurorat/mask.py (from the terminal). This script creates a binary mask for the NeuroRat model label field (data/align_waxholm_to_neurorat/aic_labels_cropped_350_336_162.nii.gz)
 
-7. The Neurorat with SIGMA labels is then relabelled with the Paxinos Watson regions using write_paxinos_watson_regions_to_neurorat.py (run from the terminal)
+6. Run the script align_waxholm_to_neurorat/register.sh. This script launches align_waxholm_to_neurorat/register_waxholm2aic.py, which creates a nonlinear alignment between the Waxholm atlas (data/align_waxholm_to_neurorat/WHS_T2star_prealigned.nii.gz) and the NeuroRat atlas (data/align_waxholm_to_neurorat/aic_t1_cropped_350_336_162.nii.gz)
 
-8. Next, the script mask_neurorat_and_paxinos_watson.py is run from the terminal. This script creates a mask of the Neurorat, and of the Paxinos Watson atlas, in which only background and non-background are distinguished.
+### Register SIGMA Atlas to NeuroRat space
 
-9. The masked image created in step 8 is aligned to the Paxinos Watson atlas using create_transform_neurorat_to_paxinos_watson.sh. This script loads the Paxinos Watson atlas (data/Paxinos_Watson_Atlas.nii.gz), the Neurorat with Paxinos Watson labels, and the masks for each of these two atlases, and uses FSL FLIRT to align the Neurorat to the Paxinos Watson atlas.
+7. The script transform_sigma_atlas_to_neurorat_space.sh is run next. This first calls the script convert_to_ants_transform_sigma_to_waxholm.py, which converts the FSL transformation matrix from step 4 to an ANTs transformation matrix. transform_sigma_atlas_to_neurorat_space.sh then applies the ANTs transformation to the original SIGMA atlas; this produces a model in Waxholm space with the original SIGMA labels. It then aligns the SIGMA-labeled Waxholm rat to the NeuroRat using the transform calculated in step 6 (data/transform_waxholm_to_neurorat.h5)
 
-10. The transform calculated in the previous step is applied to the Neurorat label field using transform_neurorat_to_paxinos_watson_space.sh. This script first calls convert_to_ants_transform_neurorat_to_paxinos_watson.py, which loads the FSL transformation matrix that maps the Neurorat to the Paxinos Watson atlas, and writes it as an ANTs transform. The script then resizes the Paxinos Watson atlas to match the size of the Neurorat (data/Neurorat.nii.gz) plus 100 pixels of padding. The script transform_neurorat_to_paxinos_watson_space.sh. then loads the Neurorat head label field (data/Neurorat.nii.gz),  the padded Paxinos Watson image, and aligns the former to the latter using the ANTs transform generated by convert_to_ants_transform_neurorat_to_paxinos_watson.py. This step also applies a scaling of 0.96875 in order to match the juvenile rat.
+### Relabel NeuroRat with regions from Paxinos-Watson atlas
 
-### Align Waxholm atlas with NeuroRat
-This section describes the process by which the transform defined in data/transform_waxholm_to_neurorat.h5 is created. For convenience, we include the transform in the Zenodo repository, so this section does not need to be executed by the user
+8. The mapping from the SIGMA labels to the Paxinos-Watson labels is calculated using the script **match_sigma_regions_to_paxinos_watson_atlas.py** (run from the terminal). This loads the lists of tissues for the Paxinos Watson atlas (data/Paxinos_Watson_Labels_Cortex.txt for the cortex and data/Paxinos_Watson_Labels.txt for the whole brain) and creates a mapping between them and the list of tissues in the SIGMA atlas using fuzzy string matching.
 
-In order to create the transform, download and unzip the folder *align_waxholm_to_neurorat.zip* from the Zenodo repository, and copy it to the folder *data/align_waxholm_to_neurorat* in this repo. Then, run the file *code/align_waxholm_to_neurorat/register_waxholm2aic.py*
+9. The SIGMA-labelled model in NeuroRat space (produced at the end of step 7) is then relabelled with the Paxinos Watson regions using write_paxinos_watson_regions_to_neurorat.py (run from the terminal)
+
+### Register NeuroRat to Paxinos-Watson space
+
+10. Next, the script mask_neurorat_and_paxinos_watson.py is run from the terminal. This script creates a mask of the NeuroRat, and of the Paxinos Watson atlas, in which only background and non-background are distinguished.
+
+11. The masked image created in step 10 is aligned to the Paxinos Watson atlas using create_transform_neurorat_to_paxinos_watson.sh. This script loads the Paxinos Watson atlas (data/Paxinos_Watson_Atlas.nii.gz), the NeuroRat with Paxinos Watson labels (created in step 9), and the masks for each of these two atlases, and uses FSL FLIRT to align the Neurorat to the Paxinos Watson atlas.
+
+12. The transform calculated in the previous step is applied to the Neurorat label field using transform_neurorat_to_paxinos_watson_space.sh. This script first calls convert_to_ants_transform_neurorat_to_paxinos_watson.py, which loads the FSL transformation matrix that maps the Neurorat to the Paxinos Watson atlas, and writes it as an ANTs transform. The script then resizes the Paxinos Watson atlas to match the size of the Neurorat (data/Neurorat.nii.gz) plus 100 pixels of padding. The script transform_neurorat_to_paxinos_watson_space.sh. then loads the Neurorat head label field (data/Neurorat.nii.gz),  the padded Paxinos Watson image, and aligns the former to the latter using the ANTs transform generated by convert_to_ants_transform_neurorat_to_paxinos_watson.py. This step also applies a scaling of 0.96875 in order to match the juvenile rat.
 
 ## Citation
 If you use this software, we kindly ask you to cite the following publication: BlueRecording: A Pipeline for efficient calculation of extracellular recordings in large-scale neural circuit models
