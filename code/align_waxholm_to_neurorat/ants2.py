@@ -394,7 +394,7 @@ class Registration(object):
         return args
 
     def get_transform(self):
-        return self.output_prefix + "Composite.h5"
+        return self.output_prefix + "transform_waxholm_to_neurorat.h5"
 
     def run(self, logfile):
         args = [config.antsRegistrationCommand]

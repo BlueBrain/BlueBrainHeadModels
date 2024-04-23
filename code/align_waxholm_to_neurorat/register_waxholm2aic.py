@@ -23,22 +23,22 @@ Parameters = namedtuple_with_defaults(
 )
 
 param = Parameters(
-    moving="../../data/align_waxholm_to_neurorat/WHS_T2star_prealigned.nii.gz",
-    fixed="../../data/align_waxholm_to_neurorat/aic_t1_cropped_350_336_162.nii.gz",
+    moving="../../data/align_waxholm_to_neurorat/Waxholm_Atlas_MRI.nii.gz",
+    fixed="../../data/align_waxholm_to_neurorat/NeuroRat_MRI.nii.gz",
     working_dir=".",
     gradient_step=0.05,
 )
 
-moving_mask = "NULL"
 moving_mask = (
-    "../../data/align_waxholm_to_neurorat/WHS_mask3_prealigned.nii.gz"
+    "../../data/align_waxholm_to_neurorat/Waxholm_Atlas_Mask.nii.gz"
 )
-fixed_mask = ('fixed_mask.nii.gz')
+
+fixed_mask = ('../../intermediateFiles/NeuroRatMask.nii.gz')
 
 moving_labels = (
-    "../../data/align_waxholm_to_neurorat/WHS_atlas_prealigned.nii.gz"
+    "../../data/align_waxholm_to_neurorat/Waxholm_Atlas_Labels.nii.gz"
 )
-fixed_labels = "../../data/align_waxholm_to_neurorat/aic_labels_cropped_350_336_162.nii.gz"
+fixed_labels = "../../data/align_waxholm_to_neurorat/NeuroRatLabels.nii.gz"
 
 # -------------------------------------------------------------------------------
 working_dir = param.working_dir
@@ -48,7 +48,7 @@ if not os.path.exists(working_dir):
 # create registration driver
 reg = ants2.Registration()
 reg.init_transform_off()
-reg.output_prefix = os.path.join(working_dir, "whs2osparc_bsyn_msb3_")
+reg.output_prefix = '../../intermediateFiles/'
 reg.working_dir = working_dir
 
 # add rigid stage
@@ -96,7 +96,7 @@ with open(reg.output_prefix + ".log", "w") as logfile:
             # reg.apply_transform(param.moving, param.fixed, False, output=None, logfile=logfile)
 
             ofile = reg.output_prefix + "whs_atlas_aligned_osparcratwears.nii.gz"
-            fixed_labels = "../../data/align_waxholm_to_neurorat/aic_labels_cropped_350_336_162.nii.gz"
+            fixed_labels = "../../data/align_waxholm_to_neurorat/NeuroRatLabels.nii.gz"
             reg.apply_transform(
                 moving_labels, fixed_labels, True, output=ofile, logfile=logfile
             )
