@@ -1,3 +1,4 @@
+data/
 intermediateFiles/
 code/*.nii.gz
 **/*.log
@@ -6,9 +7,5 @@ code/*.nii.gz
 **/*.swp
 **/*.swo
 .ipynb_checkpoints/
-data/
 __pycache__/
-**/registerOld.py
-code/align_waxholm_to_neurorat/*.nii.gz
-code/align_waxholm_to_neurorat/*.h5
 license_notes.txt
