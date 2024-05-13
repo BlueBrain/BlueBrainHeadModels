@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+
 import os
 
 antsExeDir = '/gpfs/bbp.cscs.ch/project/proj85/bin/' # Path to ANTs installation

@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
 from thefuzz import process,fuzz
 import numpy as np 
 

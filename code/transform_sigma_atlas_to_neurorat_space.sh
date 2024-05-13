@@ -9,6 +9,7 @@
 #SBATCH --exclusive
 #SBATCH --mem=0
 
+# SPDX-License-Identifier: Apache-2.0
 
 source ../../environments/atlasEnv/bin/activate # Needs to be set by the user
 

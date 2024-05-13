@@ -8,6 +8,7 @@
 #SBATCH --account=proj85
 #SBATCH --no-requeue
 #SBATCH --exclusive
+# SPDX-License-Identifier: Apache-2.0
 
 ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=2560
 

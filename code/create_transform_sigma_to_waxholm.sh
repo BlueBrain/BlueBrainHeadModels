@@ -5,6 +5,7 @@
 #SBATCH --time=24:00:00 
 #SBATCH --account=proj85
 #SBATCH --mem=0
+# SPDX-License-Identifier: Apache-2.0
 
 export moving_nii='../intermediateFiles/sigma_atlas_with_waxholm_labels.nii.gz' # Sigma atlas with waxholm labels, produced by write_waxholm_regions_to_sigma_atlas.py
 

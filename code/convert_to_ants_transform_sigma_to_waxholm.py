@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
 import ants
 import numpy as np
 import scipy.io as sio

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+
 import os, sys
 from collections.abc import Mapping
 from collections import namedtuple
